@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local="clr-namespace:WpfClient"
-        mc:Ignorable="d" WindowState="Maximized" Title="UserWindow" Height="450" Width="800">
+        mc:Ignorable="d" WindowState="Maximized" Title="UserWindow" Height="800" Width="1200">
     
     <Window.Resources>
         <Storyboard x:Key="CloseMenu">

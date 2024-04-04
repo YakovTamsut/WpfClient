@@ -128,6 +128,12 @@
   <wsdl:message name="IServiceModel_SelectAllUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:SelectAllUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceModel_GetAllPlanAdmins_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPlanAdmins" />
+  </wsdl:message>
+  <wsdl:message name="IServiceModel_GetAllPlanAdmins_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPlanAdminsResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceModel_GetUserWorkoutPlans_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUserWorkoutPlans" />
   </wsdl:message>
@@ -238,6 +244,10 @@
     <wsdl:operation name="SelectAllUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceModel/SelectAllUsers" message="tns:IServiceModel_SelectAllUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceModel/SelectAllUsersResponse" message="tns:IServiceModel_SelectAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlanAdmins">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceModel/GetAllPlanAdmins" message="tns:IServiceModel_GetAllPlanAdmins_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceModel/GetAllPlanAdminsResponse" message="tns:IServiceModel_GetAllPlanAdmins_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUserWorkoutPlans">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceModel/GetUserWorkoutPlans" message="tns:IServiceModel_GetUserWorkoutPlans_InputMessage" />
@@ -435,6 +445,15 @@
     </wsdl:operation>
     <wsdl:operation name="SelectAllUsers">
       <soap:operation soapAction="http://tempuri.org/IServiceModel/SelectAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlanAdmins">
+      <soap:operation soapAction="http://tempuri.org/IServiceModel/GetAllPlanAdmins" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

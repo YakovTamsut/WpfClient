@@ -27,9 +27,6 @@ namespace WpfClient
         private ServiceModelClient GymService;
         public WorkoutPlan workPlan;
         private ExerciseInWorkOutList exInWoList;
-        private int sum = 0;
-        private int count = 0;
-        private double avg = 0;
         private bool isLarge;
         protected bool isUp = false;
         public bool isTrash = false;
@@ -40,7 +37,10 @@ namespace WpfClient
             GymService = new ServiceModelClient();
             workPlan = wp;
             this.isLarge = isLarge;
-            LoadData();
+            if(workPlan!=null)
+                LoadData();
+            else
+                titleTB.Text = "No Workout today";
         }
         public WorkoutsUC(bool isTrash)
         {
@@ -69,7 +69,22 @@ namespace WpfClient
         private void LoadData()
         {
             MiniExLB.Items.Clear();
+            if (workPlan == null)
+            {
+                titleTB.Text = "No Workout";
+                return;
+            }
             exInWoList = GymService.SelectExInByWorkOut(workPlan.Workout);
+            if (exInWoList == null)
+            {
+                titleTB.Text = "No Workout";
+                return;
+            }
+
+
+            int sum = 0;
+            int count = 0;
+            double avg = 0;
             if (!isLarge)
             {
                 if (workPlan.Day != 0)
@@ -105,7 +120,7 @@ namespace WpfClient
                     sum += exInWo.Exercise.Difficulty;
                 }
             }
-
+            //Border color by ex difficulty
             avg = sum / count;
             if (avg > 2.4)
             {
@@ -122,7 +137,7 @@ namespace WpfClient
                     mainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#22b305"));
                 }
             }
-            
+
             if (workPlan.Workout.Duration >= 60)
             {
                 int hours, minutes;
@@ -147,7 +162,6 @@ namespace WpfClient
                 today.Text = "Today's workout:";
                 today.Height = 40;
             }
-
         }
 
         public int GetDay()
@@ -157,26 +171,13 @@ namespace WpfClient
 
         internal void ChangePlan(WorkoutPlan plan, bool isInUse)
         {
-            if (isInUse)
-            {
-                this.Height = 400;
-                this.Width = 320;
-                titleTB.Text = "No Workout";
-                titleTB.VerticalAlignment = VerticalAlignment.Center;
-                MiniExLB.Items.Clear();
-                mainBorder.BorderBrush = Brushes.DarkMagenta;
-                this.Tag = plan;
-            }
-            else
-            {
-                workPlan = plan;
-                this.isLarge = false;
-                count = 0;
-                sum = 0;
-                this.Tag = plan;
-                LoadData();
-            }
-           
+            this.Tag = workPlan = plan;
+            this.isLarge = false;
+            titleTB.Text = "No Workout";
+            titleTB.VerticalAlignment = VerticalAlignment.Center;
+            MiniExLB.Items.Clear();
+            mainBorder.BorderBrush = Brushes.DarkMagenta;
+            if(plan!=null && plan.ID!=0) LoadData();
         }
 
         internal void AnimateSize()

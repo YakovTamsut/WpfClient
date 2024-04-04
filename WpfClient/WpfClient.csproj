@@ -92,6 +92,9 @@
     <Compile Include="MiniExerciseUC.xaml.cs">
       <DependentUpon>MiniExerciseUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProgramPlanUC.xaml.cs">
+      <DependentUpon>ProgramPlanUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetRepEXUC.xaml.cs">
       <DependentUpon>SetRepEXUC.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MiniExerciseUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProgramPlanUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

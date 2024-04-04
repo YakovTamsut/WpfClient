@@ -641,6 +641,12 @@ namespace WpfClient.JewGymService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/SelectAllUsers", ReplyAction="http://tempuri.org/IServiceModel/SelectAllUsersResponse")]
         System.Threading.Tasks.Task<WpfClient.JewGymService.UserList> SelectAllUsersAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/GetAllPlanAdmins", ReplyAction="http://tempuri.org/IServiceModel/GetAllPlanAdminsResponse")]
+        WpfClient.JewGymService.UserList GetAllPlanAdmins();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/GetAllPlanAdmins", ReplyAction="http://tempuri.org/IServiceModel/GetAllPlanAdminsResponse")]
+        System.Threading.Tasks.Task<WpfClient.JewGymService.UserList> GetAllPlanAdminsAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/GetUserWorkoutPlans", ReplyAction="http://tempuri.org/IServiceModel/GetUserWorkoutPlansResponse")]
         WpfClient.JewGymService.WorkoutPlanList GetUserWorkoutPlans(WpfClient.JewGymService.User user);
         
@@ -857,6 +863,14 @@ namespace WpfClient.JewGymService {
         
         public System.Threading.Tasks.Task<WpfClient.JewGymService.UserList> SelectAllUsersAsync() {
             return base.Channel.SelectAllUsersAsync();
+        }
+        
+        public WpfClient.JewGymService.UserList GetAllPlanAdmins() {
+            return base.Channel.GetAllPlanAdmins();
+        }
+        
+        public System.Threading.Tasks.Task<WpfClient.JewGymService.UserList> GetAllPlanAdminsAsync() {
+            return base.Channel.GetAllPlanAdminsAsync();
         }
         
         public WpfClient.JewGymService.WorkoutPlanList GetUserWorkoutPlans(WpfClient.JewGymService.User user) {

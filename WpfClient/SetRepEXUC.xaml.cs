@@ -35,7 +35,11 @@ namespace WpfClient
         private void Finished_Click(object sender, RoutedEventArgs e)
         {
             ValidNumber valid = new ValidNumber();
-
+            if(repsTB.Text.Length == 0||  setsTB.Text.Length == 0)
+            {
+                MessageBox.Show("Empty field");
+                return;
+            }
             if (!valid.Validate(setsTB, null).IsValid || !valid.Validate(repsTB, null).IsValid)
             {
                 MessageBox.Show(valid.Validate(setsTB, null).ErrorContent.ToString());

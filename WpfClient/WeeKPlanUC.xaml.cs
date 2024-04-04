@@ -196,72 +196,50 @@ namespace WpfClient
 
         private void Uc_Drop(object sender, DragEventArgs e)
         {
-            WorkoutsUC drag=e.Data.GetData("Object") as WorkoutsUC;
-            WorkoutsUC drop= sender as WorkoutsUC;
-            WorkoutPlan planDrag= drag.Tag as WorkoutPlan;
+            WorkoutsUC drag = e.Data.GetData("Object") as WorkoutsUC;
+            WorkoutsUC drop = sender as WorkoutsUC;
+            WorkoutPlan planDrag = drag.Tag as WorkoutPlan;
             WorkoutPlan planDrop = drop.Tag as WorkoutPlan;
-            if (planDrag.Workout == null || planDrop.Workout == null)
-            {
-                if (drop.isTrash && planDrag != null)
-                {
-                    MessageBoxResult remove = MessageBox.Show($"Do you want to delete {planDrag.Workout.Type}? permanently", "🏋️‍", MessageBoxButton.YesNo);
-                    if (remove == MessageBoxResult.Yes)
-                    {
-                        GymService.DeleteWorkout(planDrag.Workout);
-                        workPlans.RemoveAll(w=>w.Workout.ID==planDrag.ID);
-                        if (drag.Parent == ExLB)
-                        {
-                            ExLB.Items.Remove(drag);
-                        }
-                        drag.ChangePlan(planDrop, true);
-                    }
-                }
-                if (planDrop.Workout == null && planDrag != null)
-                {
-                    MessageBoxResult answer = MessageBox.Show($"Do you want to change {planDrag.Workout.Type} with rest?", "🏋️‍", MessageBoxButton.YesNo);
-                    if (planDrag.Day != 0 && answer == MessageBoxResult.Yes)
-                    {
-                        int num = planDrag.Day;
-                        planDrag.Day = planDrop.Day;
-                        planDrop.Day = num;
-                        drop.ChangePlan(planDrag, false);
-                        drag.ChangePlan(planDrop, true);
-                        GymService.UpdateWorkoutPlan(planDrag);
-                    }
-                    else
-                    {
 
+            //Error?
+            if (planDrop!=null && planDrag!=null && planDrop.Day == planDrag.Day) return;
+            //Delete workout?
+            if (drop.isTrash && planDrag != null)
+            {
+                MessageBoxResult remove = MessageBox.Show($"Do you want to delete {planDrag.Workout.Type}? permanently", "🏋️‍", MessageBoxButton.YesNo);
+                if (remove == MessageBoxResult.Yes)
+                {
+                    GymService.DeleteWorkout(planDrag.Workout);
+                    workPlans.RemoveAll(w => w.Workout.ID == planDrag.ID);
+                    if (drag.Parent == ExLB)
+                    {
+                        ExLB.Items.Remove(drag);
                     }
+                    drag.ChangePlan(planDrop, true);
                 }
                 return;
             }
-            else
-            {
-                if (planDrop.Day == planDrag.Day) return;
-            }
 
-            MessageBoxResult result= MessageBox.Show($"Do you want to change {planDrop.Workout.Type} to {planDrag.Workout.Type}?", "🏋️‍", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes && planDrag.Day == 0 || planDrop.Day == 0 && planDrop.Day != planDrag.Day)
+            string from = planDrag.Workout!=null? planDrag.Workout.Type: "rest day";
+            string to = planDrop.Workout != null ? planDrop.Workout.Type : "rest day";
+            MessageBoxResult answer = MessageBox.Show($"Do you want to change {from} with {to}?", "🏋️‍", MessageBoxButton.YesNo);
+            if (answer == MessageBoxResult.Yes)
             {
+                //from side view?
+                bool sideDrag = planDrag.Day == 0;
+                //switch days
                 int num = planDrag.Day;
                 planDrag.Day = planDrop.Day;
                 planDrop.Day = num;
-                drop.ChangePlan(planDrag, false);
-                drag.ChangePlan(planDrop, false);
+
+                drop.ChangePlan(planDrag,true);
+                drag.ChangePlan(planDrop, sideDrag);
 
                 //update change in service
-                GymService.UpdateWorkoutPlan(planDrop);
-                GymService.UpdateWorkoutPlan(planDrag);
-            }
-            if (result == MessageBoxResult.Yes && planDrag.Day != 0 && planDrop.Day != 0 & planDrop.Day != planDrag.Day)
-            {
-                int num = planDrag.Day;
-                planDrag.Day = planDrop.Day;
-                planDrop.Day = num;
-                drop.ChangePlan(planDrag, false);
-                drag.ChangePlan(planDrop, false);
-                GymService.UpdateWorkoutPlan(planDrop);
-                GymService.UpdateWorkoutPlan(planDrag);
+                if(planDrag.Workout!=null)
+                    GymService.UpdateWorkoutPlan(planDrag);
+                if (planDrop.Workout != null)
+                    GymService.UpdateWorkoutPlan(planDrop);
             }
         }
 

@@ -10,27 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfClient.JewGymService;
 
 namespace WpfClient
 {
     /// <summary>
-    /// Interaction logic for ManagerWindow.xaml
+    /// Interaction logic for ProgramPlanUC.xaml
     /// </summary>
-    public partial class ManagerWindow : Window
+    
+    public partial class ProgramPlanUC : UserControl
     {
+
         private ServiceModelClient GymService;
-        private UserList planlist;
-        public ManagerWindow(User user)
+        public ProgramPlanUC(User user)
         {
             InitializeComponent();
-            GymService = new ServiceModelClient();
-            planlist = GymService.GetAllPlanAdmins();
-            foreach (User u in planlist) 
-            { 
-
-            }
         }
     }
 }
