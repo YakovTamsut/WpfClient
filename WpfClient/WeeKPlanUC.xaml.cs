@@ -204,43 +204,59 @@ namespace WpfClient
             //Error?
             if (planDrop!=null && planDrag!=null && planDrop.Day == planDrag.Day) return;
             //Delete workout?
-            if (drop.isTrash && planDrag != null)
+            if (drop.isTrash)
             {
-                MessageBoxResult remove = MessageBox.Show($"Do you want to delete {planDrag.Workout.Type}? permanently", "🏋️‍", MessageBoxButton.YesNo);
-                if (remove == MessageBoxResult.Yes)
+                if (planDrag.Workout != null)
                 {
-                    GymService.DeleteWorkout(planDrag.Workout);
-                    workPlans.RemoveAll(w => w.Workout.ID == planDrag.ID);
-                    if (drag.Parent == ExLB)
+                    MessageBoxResult remove = MessageBox.Show($"Do you want to delete {planDrag.Workout.Type}? permanently", "🏋️‍", MessageBoxButton.YesNo);
+                    if (remove == MessageBoxResult.Yes)
                     {
-                        ExLB.Items.Remove(drag);
+                        GymService.DeleteWorkout(planDrag.Workout);
+                        workPlans.RemoveAll(w => w.Workout.ID == planDrag.ID);
+                        if (drag.Parent == ExLB)
+                        {
+                            ExLB.Items.Remove(drag);
+                        }
+                        drag.ChangePlan(planDrop, true);
                     }
-                    drag.ChangePlan(planDrop, true);
                 }
                 return;
             }
-
-            string from = planDrag.Workout!=null? planDrag.Workout.Type: "rest day";
-            string to = planDrop.Workout != null ? planDrop.Workout.Type : "rest day";
-            MessageBoxResult answer = MessageBox.Show($"Do you want to change {from} with {to}?", "🏋️‍", MessageBoxButton.YesNo);
-            if (answer == MessageBoxResult.Yes)
+            else
             {
-                //from side view?
-                bool sideDrag = planDrag.Day == 0;
-                //switch days
-                int num = planDrag.Day;
-                planDrag.Day = planDrop.Day;
-                planDrop.Day = num;
+                MessageBoxResult answer;
+                string from = planDrag.Workout != null ? planDrag.Workout.Type : "rest day";
+                string to = planDrop.Workout != null ? planDrop.Workout.Type : "rest day";
+                if (planDrop.Workout == null)
+                {
+                    answer = MessageBox.Show($"Do you want to place {from} in {planDrop.Day}?", "🏋️‍", MessageBoxButton.YesNo);
+                }
+                else
+                {
+                    answer = MessageBox.Show($"Do you want to change {from} with {to}?", "🏋️‍", MessageBoxButton.YesNo);
+                }
 
-                drop.ChangePlan(planDrag,true);
-                drag.ChangePlan(planDrop, sideDrag);
+                if (answer == MessageBoxResult.Yes)
+                {
+                    //from side view?
+                    bool sideDrag = planDrag.Day == 0;
+                    //switch days
+                    int num = planDrag.Day;
+                    planDrag.Day = planDrop.Day;
+                    planDrop.Day = num;
 
-                //update change in service
-                if(planDrag.Workout!=null)
-                    GymService.UpdateWorkoutPlan(planDrag);
-                if (planDrop.Workout != null)
-                    GymService.UpdateWorkoutPlan(planDrop);
+                    drop.ChangePlan(planDrag, true);
+                    drag.ChangePlan(planDrop, sideDrag);
+
+                    //update change in service
+                    if (planDrag.Workout != null)
+                        GymService.UpdateWorkoutPlan(planDrag);
+                    if (planDrop.Workout != null)
+                        GymService.UpdateWorkoutPlan(planDrop);
+                }
             }
+
+            
         }
 
         private void Uc_MouseMove(object sender, MouseEventArgs e)

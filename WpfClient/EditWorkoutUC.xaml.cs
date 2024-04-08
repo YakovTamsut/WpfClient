@@ -12,25 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfClient.JewGymService;
 
 namespace WpfClient
 {
     /// <summary>
-    /// Interaction logic for DayUC.xaml
+    /// Interaction logic for EditWorkoutUC.xaml
     /// </summary>
-    public partial class DayUC : UserControl
+    public partial class EditWorkoutUC : UserControl
     {
-        private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-        public DayUC(WorkoutsUC wuc)
+        public EditWorkoutUC(User user, WorkoutPlan wp)
         {
             InitializeComponent();
-            dayTB.Text = days[wuc.GetDay() - 1];
-            workoutST.Children.Add(wuc);
-        }
-        public DayUC(EditWorkoutUC eo)
-        {
-            InitializeComponent();
-            dayTB.Text = days[-1];
+            textTB.Text = wp.Workout.Type;
         }
     }
 }

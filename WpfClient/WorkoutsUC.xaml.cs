@@ -37,10 +37,19 @@ namespace WpfClient
             GymService = new ServiceModelClient();
             workPlan = wp;
             this.isLarge = isLarge;
-            if(workPlan!=null)
+            if (workPlan != null)
                 LoadData();
             else
+            {
+                mainBorder.Height = 700;
+                mainBorder.Width = 550;
+                this.Height = 850;
+                this.Width = 600;
                 titleTB.Text = "No Workout today";
+                today.Height = 40;
+                today.FontSize = 24;
+            }
+
         }
         public WorkoutsUC(bool isTrash)
         {

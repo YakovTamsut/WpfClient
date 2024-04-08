@@ -4,7 +4,7 @@
             <TextBlock x:Name="today" FontWeight="Bold" FontSize="28" Height="0" HorizontalAlignment="Center"/>
             <TextBlock Margin="0,8" x:Name ="titleTB" Text="Workout Name" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center"
                        TextWrapping="WrapWithOverflow" Padding="15, 0"/>
-            <ListBox  x:Name="MiniExLB" Height="340" Width="260"
+            <ListBox  x:Name="MiniExLB" Height="320" Width="260"
                       VerticalAlignment="Top"
                       HorizontalAlignment="Center"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden" 

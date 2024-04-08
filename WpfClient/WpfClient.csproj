@@ -83,6 +83,9 @@
     <Compile Include="DayUC.xaml.cs">
       <DependentUpon>DayUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditWorkoutUC.xaml.cs">
+      <DependentUpon>EditWorkoutUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExerciseUC.xaml.cs">
       <DependentUpon>ExerciseUC.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DayUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditWorkoutUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

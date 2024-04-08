@@ -32,5 +32,20 @@ namespace WpfClient
 
             }
         }
+
+        private void CreateProgram_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CreateProgramPlans_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonCloseApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -61,7 +61,7 @@
                             <TextBlock Text="Create Program" Margin="10" />
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0" Selected="MyWorkout_Selected">
+                    <ListViewItem Height="45" Padding="0" Selected="CreateProgramPlans_Selected">
                         <StackPanel Orientation="Horizontal" Margin="10 0">
                             <materialDesign:PackIcon Kind="Paper" Width="20" Height="20" Foreground="#FFF08033" Margin="5" VerticalAlignment="Center" />
                             <TextBlock Text="Create Program Plans" Margin="10" />
