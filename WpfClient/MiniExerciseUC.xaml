@@ -19,5 +19,8 @@
             </WrapPanel>
             <TextBlock Text="{Binding Path=TargetMuscle}" Foreground="#555" x:Name="tbInfo" />
         </StackPanel>
+        <Button Width="20" Grid.ColumnSpan="2" Height="20" Background="Red" BorderBrush="DarkRed" BorderThickness="1" FontSize="12" FontWeight="Bold" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top">
+            X
+        </Button>
     </Grid>
 </UserControl>

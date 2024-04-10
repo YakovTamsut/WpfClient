@@ -83,7 +83,8 @@ namespace WpfClient
             }
             ExerciseInWorkOut exInWo = new ExerciseInWorkOut { Exercise = exercise, Sets=int.Parse(sets), Reps=int.Parse(reps)};
             exInWoList.Add(exInWo);
-            MiniExerciseUC uc = new MiniExerciseUC(exercise, exInWo, true, true);
+            MiniExerciseUC uc = new MiniExerciseUC(exercise, exInWo, true, true,this);
+            uc.MouseDoubleClick += RemoveUc_MouseDoubleClick;
             ExLB.Items.Add(uc);
             ExLB.ScrollIntoView(ExLB.Items[ExLB.Items.Count - 1]);
             countSets += int.Parse(sets);
@@ -96,6 +97,11 @@ namespace WpfClient
                 countSets += int.Parse(sets);
             }
             Clear();
+        }
+
+        private void RemoveUc_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ExLB.Items.Remove(sender as MiniExerciseUC);
         }
 
         public void Clear()

@@ -22,11 +22,13 @@ namespace WpfClient
     {
         private ServiceModelClient GymService;
         private UserList planlist;
+        private User curentUser;
         public ManagerWindow(User user)
         {
             InitializeComponent();
             GymService = new ServiceModelClient();
             planlist = GymService.GetAllPlanAdmins();
+            curentUser = user;
             foreach (User u in planlist) 
             { 
 
@@ -35,6 +37,8 @@ namespace WpfClient
 
         private void CreateProgram_Selected(object sender, RoutedEventArgs e)
         {
+            ProgramPlanUC program = new ProgramPlanUC(curentUser);
+            MainView.Children.Add(program);
 
         }
 

@@ -49,9 +49,9 @@ namespace WpfClient
             if (user.IsManager)
             {
                 MessageBox.Show("nice Login");
-                UserWindow mW = new UserWindow(user);
+                ManagerWindow mw = new ManagerWindow(user);
                 this.Close();
-                mW.ShowDialog();
+                mw.ShowDialog();
             }
             else
             {
@@ -110,7 +110,7 @@ namespace WpfClient
         {
             user = new User { Email = "moshe@gmail.com", Password ="Moshe_123" };
             user = GymService.Login(user);
-            UserWindow wp = new UserWindow(user);
+            ManagerWindow wp = new ManagerWindow(user);
             wp.ShowDialog();
             this.Close();
            

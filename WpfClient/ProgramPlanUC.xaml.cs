@@ -19,7 +19,7 @@ namespace WpfClient
     /// <summary>
     /// Interaction logic for ProgramPlanUC.xaml
     /// </summary>
-    
+
     public partial class ProgramPlanUC : UserControl
     {
 
@@ -27,103 +27,90 @@ namespace WpfClient
         public ProgramPlanUC(User user)
         {
             InitializeComponent();
+            bool[] empty = new bool[7];
+            GymService=new ServiceModelClient();
             foreach (WorkoutPlan wp in GymService.GetUserWorkoutPlans(user))
             {
                 if (wp.Day != 0)
                 {
-                }
-                //uc.MouseMove += Uc_MouseMove;
-                //uc.MouseUp += Uc_MouseUp;
-                //uc.Drop += Uc_Drop;
-                //uc.Tag = wp;
-                if (wp.Day != 0)
-                {
                     //ExWP.Children.Add(uc);
-                    DayUC duc = new DayUC(uc);
-                    EditWorkoutUC uc = new EditWorkoutUC(user, wp);
-
+                    EditWorkoutUC ewo = new EditWorkoutUC(wp);
+                    ewo.MouseUp += Ewo_MouseUp;
                     switch (wp.Day)
                     {
                         case 1:
-                            SundaySP.Children.Add(duc);
+                            SundaySP.Children.Add(ewo);
                             empty[0] = true;
                             break;
                         case 2:
-                            MondaySP.Children.Add(duc);
+                            MondaySP.Children.Add(ewo);
                             empty[1] = true;
                             break;
                         case 3:
-                            TuesdaySP.Children.Add(duc);
+                            TuesdaySP.Children.Add(ewo);
                             empty[2] = true;
                             break;
                         case 4:
-                            WednesdaySP.Children.Add(duc);
+                            WednesdaySP.Children.Add(ewo);
                             empty[3] = true;
                             break;
                         case 5:
-                            ThursdaySP.Children.Add(duc);
+                            ThursdaySP.Children.Add(ewo);
                             empty[4] = true;
                             break;
                         case 6:
-                            FridaySP.Children.Add(duc);
+                            FridaySP.Children.Add(ewo);
                             empty[5] = true;
                             break;
                         case 7:
-                            SaturdaySP.Children.Add(duc);
+                            SaturdaySP.Children.Add(ewo);
                             empty[6] = true;
                             break;
                         default:
                             break;
                     }
                 }
-                else
-                {
-                    ExLB.Items.Add(uc);
-                }
-
             }
 
             for (int i = 0; i < empty.Length; i++)
             {
-                WorkoutPlan wop = new WorkoutPlan();
-                WorkoutsUC uc = new WorkoutsUC(false);
-                wop.Day = i + 1;
-                uc.workPlan = wop;
-                uc.Tag = wop;
+                EditWorkoutUC ewo = new EditWorkoutUC();
+                ewo.workPlan = new WorkoutPlan();
+                ewo.workPlan.Day = i + 1;
+                ewo.Tag = ewo.workPlan;
+
                 if (empty[i] == false)
                 {
-                    uc.MouseMove += Uc_MouseMove;
-                    uc.MouseUp += Uc_MouseUp;
-                    uc.Drop += Uc_Drop;
-                    DayUC duc = new DayUC(uc);
+                    ewo.MouseUp += Ewo_MouseUp;
+
                     switch (i)
                     {
                         case 0:
-                            SundaySP.Children.Add(duc);
+                            SundaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         case 1:
-                            MondaySP.Children.Add(duc);
+                            MondaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         case 2:
-                            TuesdaySP.Children.Add(duc);
+                            TuesdaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         case 3:
-                            WednesdaySP.Children.Add(duc);
+                            WednesdaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         case 4:
-                            ThursdaySP.Children.Add(duc);
+                            ThursdaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         case 5:
-                            FridaySP.Children.Add(duc);
+                            FridaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         case 6:
-                            SaturdaySP.Children.Add(duc);
+                            SaturdaySP.Children.Add(ewo);
                             empty[i] = true;
                             break;
                         default:
@@ -132,5 +119,16 @@ namespace WpfClient
                     }
                 }
             }
+
+        }
+        private void Ewo_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            EditWorkoutUC ewo=sender as EditWorkoutUC;
+            WorkoutPlan plan = ewo.Tag as WorkoutPlan;
+
+
+
+        }
     }
 }
+

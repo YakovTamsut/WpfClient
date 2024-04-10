@@ -21,10 +21,24 @@ namespace WpfClient
     /// </summary>
     public partial class EditWorkoutUC : UserControl
     {
-        public EditWorkoutUC(User user, WorkoutPlan wp)
+        public WorkoutPlan workPlan;
+        public EditWorkoutUC(WorkoutPlan wp)
         {
             InitializeComponent();
             textTB.Text = wp.Workout.Type;
+            this.workPlan = wp;
+
+        }
+
+        public EditWorkoutUC()
+        {
+            InitializeComponent();
+            textTB.Text = "Rest";
+        }
+
+        public void ShowWorkout()
+        {
+            return;
         }
     }
 }

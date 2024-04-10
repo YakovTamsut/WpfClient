@@ -51,6 +51,7 @@ namespace WpfClient
             }
 
         }
+
         public WorkoutsUC(bool isTrash)
         {
             InitializeComponent();
@@ -131,7 +132,7 @@ namespace WpfClient
             }
             //Border color by ex difficulty
             avg = sum / count;
-            if (avg > 2.4)
+            if (avg > 2)
             {
                 mainBorder.BorderBrush = Brushes.Red;
             }

@@ -22,6 +22,7 @@ namespace WpfClient
     public partial class MiniExerciseUC : UserControl
     {
         public Exercise currentEx;
+        private CreateWorkoutUC parent = null;
         public MiniExerciseUC(JewGymService.Exercise exercise)
         {
             InitializeComponent();
@@ -40,9 +41,10 @@ namespace WpfClient
             }
         }
 
-        public MiniExerciseUC(JewGymService.Exercise exercise, ExerciseInWorkOut exinwo, bool isActive, bool isCreate)
+        public MiniExerciseUC(JewGymService.Exercise exercise, ExerciseInWorkOut exinwo, bool isActive, bool isCreate,CreateWorkoutUC createWorkoutUC)
         {
             InitializeComponent();
+            parent = createWorkoutUC;
             this.DataContext = exercise;
             tbInfo.Text = exercise.TargetMuscle;
             setsTB.Text = " " + exinwo.Sets + "x" + exinwo.Reps;

@@ -27,10 +27,10 @@ namespace WpfClient
             dayTB.Text = days[wuc.GetDay() - 1];
             workoutST.Children.Add(wuc);
         }
-        public DayUC(EditWorkoutUC eo)
+        public DayUC(int num)
         {
             InitializeComponent();
-            dayTB.Text = days[-1];
+            dayTB.Text = days[num - 1];
         }
     }
 }
