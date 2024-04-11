@@ -23,9 +23,11 @@ namespace WpfClient
     {
         public Exercise currentEx;
         private CreateWorkoutUC parent = null;
+        public ExerciseInWorkOut exinwo;
         public MiniExerciseUC(JewGymService.Exercise exercise)
         {
             InitializeComponent();
+            mainGrid.Children.Remove(deletebtn);
             currentEx = exercise;
             this.DataContext = exercise;
             tbInfo.Text = exercise.TargetMuscle;
@@ -45,7 +47,17 @@ namespace WpfClient
         {
             InitializeComponent();
             parent = createWorkoutUC;
+            if (parent == null)
+            {
+                mainGrid.Children.Remove(deletebtn);
+            }   
+            else
+            {
+                this.Width = parent.ExLB.Width-20;
+            }
             this.DataContext = exercise;
+            this.currentEx = exercise;
+            this.exinwo = exinwo;
             tbInfo.Text = exercise.TargetMuscle;
             setsTB.Text = " " + exinwo.Sets + "x" + exinwo.Reps;
             exNameTB.Text = exercise.ExerciseName.Replace('-', ' ');
@@ -79,6 +91,27 @@ namespace WpfClient
             {
                 img.Source = new BitmapImage(new Uri($"pack://application:,,,/Sources/Logo.png"));
             }
+        }
+
+        private void Delete_Button(object sender, RoutedEventArgs e)
+        {
+            parent.RemoveMini(this);
+            //MiniExerciseUC itemToRemove = parent.ExLB.Items.Cast<MiniExerciseUC>()
+            // .FirstOrDefault(item => item == this);
+            //if (itemToRemove != null)
+            //{
+            //    if (currentEx.IsCompound)
+            //    {
+            //        parent.countCompoundSets -= exinwo.Sets;
+            //    }
+            //    else
+            //    {
+            //        parent.countSets -= exinwo.Sets;
+            //    }
+            //    parent.exInWoList.Remove(this.exinwo);
+            //    parent.ExLB.Items.Remove(itemToRemove);
+            //}
+
         }
     }
 }

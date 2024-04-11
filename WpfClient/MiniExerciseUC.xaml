@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:WpfClient"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400">
-    <Grid>
+    <Grid x:Name="mainGrid">
+        <Button x:Name="deletebtn" Click="Delete_Button" Width="20" Height="20" Background="Red" BorderBrush="DarkRed" BorderThickness="1" FontSize="12" FontWeight="Bold" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="X" Padding="0" Foreground="#800000"/>
+        <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -19,8 +21,6 @@
             </WrapPanel>
             <TextBlock Text="{Binding Path=TargetMuscle}" Foreground="#555" x:Name="tbInfo" />
         </StackPanel>
-        <Button Width="20" Grid.ColumnSpan="2" Height="20" Background="Red" BorderBrush="DarkRed" BorderThickness="1" FontSize="12" FontWeight="Bold" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top">
-            X
-        </Button>
+    </Grid>
     </Grid>
 </UserControl>

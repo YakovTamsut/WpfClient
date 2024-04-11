@@ -5,7 +5,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <!-- Workout Name Section -->
-        <Grid>
+        <Grid x:Name="mainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -34,6 +34,7 @@
                 </Grid>
             </Border>
             <Button Content="Finish" Click="finish_click" Grid.Row="2" Grid.Column="0" Margin="16" HorizontalAlignment="Center" />
+            <Button x:Name="backbtn" Content="Back" Click="back_click" Grid.Row="2" Grid.Column="0" Margin="16" HorizontalAlignment="Center" />
         </Grid>
         <!-- Finish Button -->
         <!-- Dialog Host Section -->

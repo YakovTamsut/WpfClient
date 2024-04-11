@@ -35,21 +35,38 @@ namespace WpfClient
             }
         }
 
-        private void CreateProgram_Selected(object sender, RoutedEventArgs e)
+        public void CreateProgram_Selected(object sender, RoutedEventArgs e)
         {
-            ProgramPlanUC program = new ProgramPlanUC(curentUser);
+            this.MainView.Children.Clear();
+            ProgramPlanUC program = new ProgramPlanUC(curentUser, this);
             MainView.Children.Add(program);
 
         }
 
+        public void CreateProgram()
+        {
+            this.MainView.Children.Clear();
+            ProgramPlanUC program = new ProgramPlanUC(curentUser, this);
+            MainView.Children.Add(program);
+        }
+
         private void CreateProgramPlans_Selected(object sender, RoutedEventArgs e)
         {
-
+            //this.MainView.Children.Clear();
+            //User user = new User { BirthDay = 0, }
+            //ProgramPlanUC program = new ProgramPlanUC(curentUser, this);
+            //MainView.Children.Add(program);
         }
 
         private void ButtonCloseApp_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void LoadCreateWorkout(CreateWorkoutUC puc)
+        {
+            this.MainView.Children.Clear();
+            this.MainView.Children.Add(puc);
         }
     }
 }

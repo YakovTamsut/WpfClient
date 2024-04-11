@@ -98,6 +98,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DeleteAllExInWorkout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q8:Workout" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAllExInWorkoutResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteAllExInWorkoutResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SelectAllExercisesInWorkout">
     <xs:complexType>
       <xs:sequence />
@@ -106,28 +120,28 @@
   <xs:element name="SelectAllExercisesInWorkoutResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectAllExercisesInWorkoutResult" nillable="true" type="q8:ExerciseInWorkOutList" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectAllExercisesInWorkoutResult" nillable="true" type="q9:ExerciseInWorkOutList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SelectExInByWorkOut">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q9:Workout" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q10:Workout" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SelectExInByWorkOutResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectExInByWorkOutResult" nillable="true" type="q10:ExerciseInWorkOutList" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectExInByWorkOutResult" nillable="true" type="q11:ExerciseInWorkOutList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertWorkout">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q11:Workout" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q12:Workout" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -141,7 +155,7 @@
   <xs:element name="UpdateWorkout">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q12:Workout" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q13:Workout" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -155,7 +169,7 @@
   <xs:element name="DeleteWorkout">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q13:Workout" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="workout" nillable="true" type="q14:Workout" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -174,7 +188,7 @@
   <xs:element name="SelectAllWorkoutsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectAllWorkoutsResult" nillable="true" type="q14:WorkoutList" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectAllWorkoutsResult" nillable="true" type="q15:WorkoutList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -188,28 +202,28 @@
   <xs:element name="SelectWorkoutByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectWorkoutByIdResult" nillable="true" type="q15:Workout" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectWorkoutByIdResult" nillable="true" type="q16:Workout" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Login">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q16:User" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q17:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="LoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="LoginResult" nillable="true" type="q17:User" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="LoginResult" nillable="true" type="q18:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NewUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q18:User" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q19:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -237,7 +251,7 @@
   <xs:element name="UpdateUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q19:User" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q20:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -251,7 +265,7 @@
   <xs:element name="DeleteUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q20:User" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q21:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -270,7 +284,7 @@
   <xs:element name="SelectAllUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectAllUsersResult" nillable="true" type="q21:UserList" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="SelectAllUsersResult" nillable="true" type="q22:UserList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -282,28 +296,28 @@
   <xs:element name="GetAllPlanAdminsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetAllPlanAdminsResult" nillable="true" type="q22:UserList" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetAllPlanAdminsResult" nillable="true" type="q23:UserList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserWorkoutPlans">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q23:User" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q24:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetUserWorkoutPlansResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="GetUserWorkoutPlansResult" nillable="true" type="q24:WorkoutPlanList" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="GetUserWorkoutPlansResult" nillable="true" type="q25:WorkoutPlanList" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertWorkoutPlan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="plan" nillable="true" type="q25:WorkoutPlan" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="plan" nillable="true" type="q26:WorkoutPlan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -317,7 +331,7 @@
   <xs:element name="UpdateWorkoutPlan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="plan" nillable="true" type="q26:WorkoutPlan" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="plan" nillable="true" type="q27:WorkoutPlan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -331,7 +345,7 @@
   <xs:element name="DeleteWorkoutPlan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="plan" nillable="true" type="q27:WorkoutPlan" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="plan" nillable="true" type="q28:WorkoutPlan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -345,14 +359,14 @@
   <xs:element name="GetTodayWorkoutPlan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q28:User" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="user" nillable="true" type="q29:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTodayWorkoutPlanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="GetTodayWorkoutPlanResult" nillable="true" type="q29:WorkoutPlan" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/PlanModel" minOccurs="0" name="GetTodayWorkoutPlanResult" nillable="true" type="q30:WorkoutPlan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

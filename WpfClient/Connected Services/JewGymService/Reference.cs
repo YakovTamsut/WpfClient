@@ -563,6 +563,12 @@ namespace WpfClient.JewGymService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/DeleteExInWorkout", ReplyAction="http://tempuri.org/IServiceModel/DeleteExInWorkoutResponse")]
         System.Threading.Tasks.Task<int> DeleteExInWorkoutAsync(WpfClient.JewGymService.ExerciseInWorkOut exinw);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/DeleteAllExInWorkout", ReplyAction="http://tempuri.org/IServiceModel/DeleteAllExInWorkoutResponse")]
+        int DeleteAllExInWorkout(WpfClient.JewGymService.Workout workout);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/DeleteAllExInWorkout", ReplyAction="http://tempuri.org/IServiceModel/DeleteAllExInWorkoutResponse")]
+        System.Threading.Tasks.Task<int> DeleteAllExInWorkoutAsync(WpfClient.JewGymService.Workout workout);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceModel/SelectAllExercisesInWorkout", ReplyAction="http://tempuri.org/IServiceModel/SelectAllExercisesInWorkoutResponse")]
         WpfClient.JewGymService.ExerciseInWorkOutList SelectAllExercisesInWorkout();
         
@@ -759,6 +765,14 @@ namespace WpfClient.JewGymService {
         
         public System.Threading.Tasks.Task<int> DeleteExInWorkoutAsync(WpfClient.JewGymService.ExerciseInWorkOut exinw) {
             return base.Channel.DeleteExInWorkoutAsync(exinw);
+        }
+        
+        public int DeleteAllExInWorkout(WpfClient.JewGymService.Workout workout) {
+            return base.Channel.DeleteAllExInWorkout(workout);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteAllExInWorkoutAsync(WpfClient.JewGymService.Workout workout) {
+            return base.Channel.DeleteAllExInWorkoutAsync(workout);
         }
         
         public WpfClient.JewGymService.ExerciseInWorkOutList SelectAllExercisesInWorkout() {

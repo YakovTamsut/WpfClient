@@ -25,15 +25,16 @@ namespace WpfClient
     public partial class CreateWorkoutUC : UserControl
     {
         private ServiceModelClient GymService;
-        private ExerciseInWorkOutList exInWoList;
+        public ExerciseInWorkOutList exInWoList;
         private Exercise exercise;
         private Workout workout;
-        private int countCompoundSets = 0;
-        private int countSets = 0;
+        public int countCompoundSets = 0;
+        public int countSets = 0;
         ExerciseUC exerciseUC;
         SetRepEXUC setRepEXUC;
-        private UserWindow window;
-        private WorkoutPlan wop;
+        private UserWindow window=null;
+        private ManagerWindow windowManager=null;
+        public WorkoutPlan wop;
 
         public CreateWorkoutUC(User user, UserWindow window)
         {
@@ -48,7 +49,25 @@ namespace WpfClient
             wop.Day = 0;
             GymService = new JewGymService.ServiceModelClient();
             this.window = window;
-            
+            mainGrid.Children.Remove(backbtn);
+        }
+        public CreateWorkoutUC(WorkoutPlan plan, ManagerWindow window)
+        {
+            InitializeComponent();
+            exInWoList = new ExerciseInWorkOutList();
+            DataContext = this;
+            exercise = new Exercise();
+            workout = plan.Workout;
+            workout.User = plan.User;
+            wop = plan;
+            typeTB.Text = wop.Workout.Type;
+            GymService = new JewGymService.ServiceModelClient();
+            this.windowManager = window;
+            foreach (ExerciseInWorkOut exercise in plan.Workout.ExInWorkout)
+            {
+                AddEx(exercise.Exercise, exercise.Sets.ToString(), exercise.Reps.ToString());
+            }
+
         }
         public void CloseEXhost()
         {
@@ -84,10 +103,8 @@ namespace WpfClient
             ExerciseInWorkOut exInWo = new ExerciseInWorkOut { Exercise = exercise, Sets=int.Parse(sets), Reps=int.Parse(reps)};
             exInWoList.Add(exInWo);
             MiniExerciseUC uc = new MiniExerciseUC(exercise, exInWo, true, true,this);
-            uc.MouseDoubleClick += RemoveUc_MouseDoubleClick;
             ExLB.Items.Add(uc);
             ExLB.ScrollIntoView(ExLB.Items[ExLB.Items.Count - 1]);
-            countSets += int.Parse(sets);
             if (exercise.IsCompound)
             {
                 countCompoundSets += int.Parse(sets);
@@ -97,11 +114,6 @@ namespace WpfClient
                 countSets += int.Parse(sets);
             }
             Clear();
-        }
-
-        private void RemoveUc_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ExLB.Items.Remove(sender as MiniExerciseUC);
         }
 
         public void Clear()
@@ -122,17 +134,50 @@ namespace WpfClient
                 workout.Type = typeTB.Text;
                 workout.Duration = countSets * 2 + countCompoundSets * 4;
                 workout.ExInWorkout = exInWoList;
-                workout.ID=GymService.InsertWorkout(workout);
-                wop.Workout = workout;
-                GymService.InsertWorkoutPlan(wop);
+                if (workout.ID == 0)
+                {
+                    workout.ID = GymService.InsertWorkout(workout);
+                    wop.Workout = workout;
+                    GymService.InsertWorkoutPlan(wop);
+                }
+                else
+                {
+                    GymService.UpdateWorkout(workout);
+                }
                 MessageBox.Show($"added {workout.Type} to your workouts");
-                window.CreateProgramRefresh();
+                if (windowManager != null && windowManager.GetType() == typeof(ManagerWindow))
+                {
+                    windowManager.CreateProgram();
+                }
+                else
+                {
+                    window.CreateProgramRefresh();
+                }
             }
             else
             {
                 MessageBox.Show("must add exercises");
                 return;
             }
+        }
+
+        internal void RemoveMini(MiniExerciseUC miniExerciseUC)
+        {
+            if (miniExerciseUC.currentEx.IsCompound)
+            {
+                countCompoundSets -= miniExerciseUC.exinwo.Sets;
+            }
+            else
+            {
+                countSets -= miniExerciseUC.exinwo.Sets;
+            }
+            exInWoList.Remove(miniExerciseUC.exinwo);
+            ExLB.Items.Remove(miniExerciseUC);
+        }
+
+        private void back_click(object sender, RoutedEventArgs e)
+        {
+            windowManager.CreateProgram();
         }
     }
 }

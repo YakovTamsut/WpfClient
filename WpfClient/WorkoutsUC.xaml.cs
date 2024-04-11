@@ -101,7 +101,7 @@ namespace WpfClient
                 {
                     foreach (ExerciseInWorkOut exInWo in exInWoList)
                     {
-                        MiniExLB.Items.Add(new MiniExerciseUC(exInWo.Exercise, exInWo, false, false));
+                        MiniExLB.Items.Add(new MiniExerciseUC(exInWo.Exercise, exInWo, false, false, null));
                         count++;
                         sum += exInWo.Exercise.Difficulty;
                     }
@@ -115,7 +115,7 @@ namespace WpfClient
                     this.Height = 150;
                     foreach (ExerciseInWorkOut exInWo in exInWoList)
                     {
-                        MiniExLB.Items.Add(new MiniExerciseUC(exInWo.Exercise, exInWo, false, false));
+                        MiniExLB.Items.Add(new MiniExerciseUC(exInWo.Exercise, exInWo, false, false, null));
                         count++;
                         sum += exInWo.Exercise.Difficulty;
                     }
@@ -125,7 +125,7 @@ namespace WpfClient
             {
                 foreach (ExerciseInWorkOut exInWo in exInWoList)
                 {
-                    MiniExLB.Items.Add(new MiniExerciseUC(exInWo.Exercise, exInWo, true, false));
+                    MiniExLB.Items.Add(new MiniExerciseUC(exInWo.Exercise, exInWo, true, false, null));
                     count++;
                     sum += exInWo.Exercise.Difficulty;
                 }

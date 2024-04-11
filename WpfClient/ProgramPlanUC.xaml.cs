@@ -24,9 +24,11 @@ namespace WpfClient
     {
 
         private ServiceModelClient GymService;
-        public ProgramPlanUC(User user)
+        private ManagerWindow window;
+        public ProgramPlanUC(User user, ManagerWindow window)
         {
             InitializeComponent();
+            this.window = window;
             bool[] empty = new bool[7];
             GymService=new ServiceModelClient();
             foreach (WorkoutPlan wp in GymService.GetUserWorkoutPlans(user))
@@ -35,6 +37,7 @@ namespace WpfClient
                 {
                     //ExWP.Children.Add(uc);
                     EditWorkoutUC ewo = new EditWorkoutUC(wp);
+                    ewo.Tag = ewo.workPlan;
                     ewo.MouseUp += Ewo_MouseUp;
                     switch (wp.Day)
                     {
@@ -123,10 +126,13 @@ namespace WpfClient
         }
         private void Ewo_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            EditWorkoutUC ewo=sender as EditWorkoutUC;
-            WorkoutPlan plan = ewo.Tag as WorkoutPlan;
-
-
+            EditWorkoutUC ewo = sender as EditWorkoutUC;
+            WorkoutPlan plan = ewo.workPlan as WorkoutPlan;
+            if (plan != null)
+            {
+                CreateWorkoutUC createWorkoutUC = new CreateWorkoutUC(plan, window);
+                window.LoadCreateWorkout(createWorkoutUC);
+            }
 
         }
     }

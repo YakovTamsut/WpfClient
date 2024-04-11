@@ -148,7 +148,7 @@ namespace WpfClient
         {
             WorkoutsUC uc = sender as WorkoutsUC;
             WorkoutPlan plan = uc.Tag as WorkoutPlan;
-            if (plan.Day == 0)
+            if (plan !=null && plan.Day == 0)
             {
                 uc.SetIsUp(!uc.GetIsUp());
                 uc.AnimateSize();

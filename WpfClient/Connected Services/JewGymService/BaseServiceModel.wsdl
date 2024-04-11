@@ -50,6 +50,12 @@
   <wsdl:message name="IServiceModel_DeleteExInWorkout_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteExInWorkoutResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceModel_DeleteAllExInWorkout_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAllExInWorkout" />
+  </wsdl:message>
+  <wsdl:message name="IServiceModel_DeleteAllExInWorkout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAllExInWorkoutResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceModel_SelectAllExercisesInWorkout_InputMessage">
     <wsdl:part name="parameters" element="tns:SelectAllExercisesInWorkout" />
   </wsdl:message>
@@ -193,6 +199,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceModel/DeleteExInWorkout" message="tns:IServiceModel_DeleteExInWorkout_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceModel/DeleteExInWorkoutResponse" message="tns:IServiceModel_DeleteExInWorkout_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="DeleteAllExInWorkout">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceModel/DeleteAllExInWorkout" message="tns:IServiceModel_DeleteAllExInWorkout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceModel/DeleteAllExInWorkoutResponse" message="tns:IServiceModel_DeleteAllExInWorkout_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SelectAllExercisesInWorkout">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceModel/SelectAllExercisesInWorkout" message="tns:IServiceModel_SelectAllExercisesInWorkout_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceModel/SelectAllExercisesInWorkoutResponse" message="tns:IServiceModel_SelectAllExercisesInWorkout_OutputMessage" />
@@ -328,6 +338,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteExInWorkout">
       <soap:operation soapAction="http://tempuri.org/IServiceModel/DeleteExInWorkout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAllExInWorkout">
+      <soap:operation soapAction="http://tempuri.org/IServiceModel/DeleteAllExInWorkout" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
