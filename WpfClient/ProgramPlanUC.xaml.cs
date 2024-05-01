@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfClient.JewGymService;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WpfClient
 {
@@ -25,12 +26,15 @@ namespace WpfClient
 
         private ServiceModelClient GymService;
         private ManagerWindow window;
+        private User currentUser;
         public ProgramPlanUC(User user, ManagerWindow window)
         {
             InitializeComponent();
             this.window = window;
+            this.currentUser = user;
             bool[] empty = new bool[7];
             GymService=new ServiceModelClient();
+            //PlanNameSP.Child = new EditWorkoutUC(user);
             foreach (WorkoutPlan wp in GymService.GetUserWorkoutPlans(user))
             {
                 if (wp.Day != 0)
@@ -78,8 +82,11 @@ namespace WpfClient
             for (int i = 0; i < empty.Length; i++)
             {
                 EditWorkoutUC ewo = new EditWorkoutUC();
-                ewo.workPlan = new WorkoutPlan();
-                ewo.workPlan.Day = i + 1;
+                WorkoutPlan workPlan = new WorkoutPlan();
+                workPlan.Day = i + 1;
+                workPlan.User = user;
+                workPlan.Workout = new Workout();
+                ewo.workPlan = workPlan;
                 ewo.Tag = ewo.workPlan;
 
                 if (empty[i] == false)
@@ -135,6 +142,21 @@ namespace WpfClient
             }
 
         }
+
+        private void EditName(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("do you want to delete this plan PEREMENANTLY?");
+            GymService.DeleteUser(currentUser);
+            window.planlist.Remove(currentUser);
+            window.EditProgram_Selected();
+        }
+
+
     }
 }
 

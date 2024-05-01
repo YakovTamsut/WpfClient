@@ -43,12 +43,15 @@
             <RowDefinition Height="193*" />
         </Grid.RowDefinitions>
         <Grid x:Name="GridBackground" Background="White" Opacity="0" Grid.RowSpan="2">
-          
+            <ScrollViewer Height="850 ">
+                <StackPanel x:Name="ProgramView" />
+            </ScrollViewer>
         </Grid>
         <StackPanel x:Name="MainGrid" Grid.Row="1" Orientation="Horizontal">
             <StackPanel Width="250" HorizontalAlignment="Left" />
             <Grid x:Name="MainView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
+
         <Button x:Name="ButtonOpen" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0" Grid.RowSpan="2">
             <materialDesign:PackIcon Kind="Menu" Foreground="#FF313131" />
         </Button>
@@ -85,10 +88,10 @@
                             <TextBlock Text="Today's Workout" Margin="10" />
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" Selected="RecommendedWorkour_Selected">
                         <StackPanel Orientation="Horizontal" Margin="10 0">
                             <materialDesign:PackIcon Kind="Heart" Width="20" Height="20" Foreground="#FFD41515" Margin="5" VerticalAlignment="Center" />
-                            <TextBlock Text="Recommend" Margin="10" />
+                            <TextBlock Text="Recommend workouts" Margin="10" />
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="45" Padding="0">

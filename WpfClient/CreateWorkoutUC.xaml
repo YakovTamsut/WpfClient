@@ -33,8 +33,11 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Button Content="Finish" Click="finish_click" Grid.Row="2" Grid.Column="0" Margin="16" HorizontalAlignment="Center" />
-            <Button x:Name="backbtn" Content="Back" Click="back_click" Grid.Row="2" Grid.Column="0" Margin="16" HorizontalAlignment="Center" />
+            <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+                <Button x:Name="backbtn" Content="Back" Click="back_click" Grid.Column="0" Margin="16" HorizontalAlignment="Center" />
+                <Button Content="Finish" Click="finish_click" Grid.Column="0" Margin="16" HorizontalAlignment="Center" />
+            </WrapPanel>
+            
         </Grid>
         <!-- Finish Button -->
         <!-- Dialog Host Section -->

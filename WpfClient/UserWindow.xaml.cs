@@ -51,6 +51,7 @@ namespace WpfClient
         private void Clear_Grid()
         {
             MainView.Children.Clear();
+            ProgramView.Children.Clear();
         }
 
         private void MyWorkout_Selected(object sender, RoutedEventArgs e)
@@ -68,6 +69,23 @@ namespace WpfClient
         private void TodayWorkout_Selected(object sender, RoutedEventArgs e)
         {
             LoadTodayWorkout();
+        }
+
+        private void RecommendedWorkour_Selected(object sender, RoutedEventArgs e)
+        {
+            Clear_Grid();
+            UserList users = GymService.GetAllPlanAdmins();
+            foreach (User u in users)
+            {
+                EditWorkoutUC editWorkoutUC = new EditWorkoutUC(u);
+                editWorkoutUC.MouseUp += ShowPlan;
+                ProgramView.Children.Add(editWorkoutUC);
+            }
+        }
+
+        private void ShowPlan(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

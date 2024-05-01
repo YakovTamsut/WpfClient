@@ -21,7 +21,7 @@ namespace WpfClient
     public partial class ManagerWindow : Window
     {
         private ServiceModelClient GymService;
-        private UserList planlist;
+        public UserList planlist;
         private User curentUser;
         public ManagerWindow(User user)
         {
@@ -30,32 +30,37 @@ namespace WpfClient
             planlist = GymService.GetAllPlanAdmins();
             curentUser = user;
             foreach (User u in planlist) 
-            { 
-
+            {
+                ProgramView.Children.Add(new ProgramPlanUC(u,this));
             }
         }
 
-        public void CreateProgram_Selected(object sender, RoutedEventArgs e)
+        public void EditProgram_Selected(object sender, RoutedEventArgs e)
         {
-            this.MainView.Children.Clear();
-            ProgramPlanUC program = new ProgramPlanUC(curentUser, this);
-            MainView.Children.Add(program);
-
+            this.ProgramView.Children.Clear();
+            foreach (User u in planlist)
+            {
+                ProgramView.Children.Add(new ProgramPlanUC(u, this));
+            }
         }
 
-        public void CreateProgram()
+        public void EditProgram_Selected()
         {
-            this.MainView.Children.Clear();
-            ProgramPlanUC program = new ProgramPlanUC(curentUser, this);
-            MainView.Children.Add(program);
+            this.ProgramView.Children.Clear();
+            foreach (User u in planlist)
+            {
+                ProgramView.Children.Add(new ProgramPlanUC(u, this));
+            }
         }
 
         private void CreateProgramPlans_Selected(object sender, RoutedEventArgs e)
         {
-            //this.MainView.Children.Clear();
-            //User user = new User { BirthDay = 0, }
-            //ProgramPlanUC program = new ProgramPlanUC(curentUser, this);
-            //MainView.Children.Add(program);
+            this.ProgramView.Children.Clear();
+            User user= new User() { Email= "Admin", BirthDay=DateTime.Today, Firstname="Admin", Lastname="Admin", IsManager=true, Gender=true, Password="Admin" };
+            user.ID=GymService.NewUser(user);
+            planlist.Add(user);
+            ProgramPlanUC program = new ProgramPlanUC(user, this);
+            ProgramView.Children.Add(program);
         }
 
         private void ButtonCloseApp_Click(object sender, RoutedEventArgs e)
@@ -65,8 +70,8 @@ namespace WpfClient
 
         public void LoadCreateWorkout(CreateWorkoutUC puc)
         {
-            this.MainView.Children.Clear();
-            this.MainView.Children.Add(puc);
+            this.ProgramView.Children.Clear();
+            this.ProgramView.Children.Add(puc);
         }
     }
 }

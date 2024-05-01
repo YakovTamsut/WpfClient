@@ -35,6 +35,7 @@ namespace WpfClient
         private UserWindow window=null;
         private ManagerWindow windowManager=null;
         public WorkoutPlan wop;
+        private bool isEdit = false;
 
         public CreateWorkoutUC(User user, UserWindow window)
         {
@@ -54,6 +55,7 @@ namespace WpfClient
         public CreateWorkoutUC(WorkoutPlan plan, ManagerWindow window)
         {
             InitializeComponent();
+            isEdit = true;
             exInWoList = new ExerciseInWorkOutList();
             DataContext = this;
             exercise = new Exercise();
@@ -63,11 +65,13 @@ namespace WpfClient
             typeTB.Text = wop.Workout.Type;
             GymService = new JewGymService.ServiceModelClient();
             this.windowManager = window;
-            foreach (ExerciseInWorkOut exercise in plan.Workout.ExInWorkout)
+            if (plan.Workout.ExInWorkout != null)
             {
-                AddEx(exercise.Exercise, exercise.Sets.ToString(), exercise.Reps.ToString());
+                foreach (ExerciseInWorkOut exercise in plan.Workout.ExInWorkout)
+                {
+                    AddEx(exercise.Exercise, exercise.Sets.ToString(), exercise.Reps.ToString());
+                }
             }
-
         }
         public void CloseEXhost()
         {
@@ -147,7 +151,7 @@ namespace WpfClient
                 MessageBox.Show($"added {workout.Type} to your workouts");
                 if (windowManager != null && windowManager.GetType() == typeof(ManagerWindow))
                 {
-                    windowManager.CreateProgram();
+                    windowManager.EditProgram_Selected();
                 }
                 else
                 {
@@ -156,7 +160,16 @@ namespace WpfClient
             }
             else
             {
-                MessageBox.Show("must add exercises");
+                if (isEdit)
+                {
+                    GymService.DeleteWorkout(workout);
+                    MessageBox.Show("workout set as rest");
+                    windowManager.EditProgram_Selected();
+                }
+                else
+                {
+                    MessageBox.Show("must add exercises");
+                }
                 return;
             }
         }
@@ -177,7 +190,7 @@ namespace WpfClient
 
         private void back_click(object sender, RoutedEventArgs e)
         {
-            windowManager.CreateProgram();
+            windowManager.EditProgram_Selected();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace WpfClient
     public partial class EditWorkoutUC : UserControl
     {
         public WorkoutPlan workPlan;
+        public User user;
         public EditWorkoutUC(WorkoutPlan wp)
         {
             InitializeComponent();
@@ -29,7 +30,12 @@ namespace WpfClient
             this.workPlan = wp;
 
         }
-
+        public EditWorkoutUC(User user)
+        {
+            InitializeComponent();
+            textTB.Text = user.Firstname;
+            this.user = user;
+        }
         public EditWorkoutUC()
         {
             InitializeComponent();
@@ -40,5 +46,6 @@ namespace WpfClient
         {
             return;
         }
+
     }
 }

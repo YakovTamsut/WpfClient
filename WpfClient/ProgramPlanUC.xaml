@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfClient"
-             mc:Ignorable="d" d:DesignHeight="120" d:DesignWidth="1280">
-    <Grid Width="1280" Height="120">
+             xmlns:local="clr-namespace:WpfClient" mc:Ignorable="d" d:DesignHeight="120" d:DesignWidth="1440">
+    <Grid Width="1280" Height="120" Margin="0 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="100"/>
@@ -19,16 +18,12 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="2" Grid.Row="1">
-            <TextBlock x:Name="PlanNameSP"
-                   Text="This is a long text"
-                   HorizontalAlignment="Center"
-                   TextAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="24"
-                   TextWrapping="Wrap"
-                   Width="140" />
+        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="2" Grid.Row="1" x:Name="PlanNameSP">
+            <Button Width="140" Height="100" Click="EditButton_Click">
+                <TextBlock Text="This is a long text" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" TextWrapping="Wrap" Width="140" />
+            </Button> 
         </Border>
         <StackPanel x:Name="SundaySP" Grid.Column="1" Grid.Row="1"/>
         <StackPanel x:Name="MondaySP" Grid.Column="2" Grid.Row="1" />
@@ -62,5 +57,14 @@
         <Border BorderBrush="Black" BorderThickness="2" Grid.Column="7">
             <TextBlock TextAlignment="Center" Text="Saturday" />
         </Border>
+        
+        <Button Width="40" Height="30" Margin="5" Background="Red" BorderThickness="1" BorderBrush="Red" Click="Delete" Grid.Column="8" Grid.Row="1">
+            <Grid>
+                <TextBlock Text="X" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </Button>
+        <!--<Border BorderBrush="Black" BorderThickness="2" Grid.Column="8">
+            <StackPanel x:Name="editTB" Grid.Column="8" Grid.Row="1" />
+        </Border>-->
     </Grid>
 </UserControl>
