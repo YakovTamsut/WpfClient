@@ -27,6 +27,7 @@ namespace WpfClient
         private ServiceModelClient GymService;
         private ManagerWindow window;
         private User currentUser;
+        private bool isTextBlockVisible = true;
         public ProgramPlanUC(User user, ManagerWindow window)
         {
             InitializeComponent();
@@ -156,7 +157,7 @@ namespace WpfClient
             window.EditProgram_Selected();
         }
 
-
+       
     }
 }
 

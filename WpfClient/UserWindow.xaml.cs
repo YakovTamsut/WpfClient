@@ -23,12 +23,15 @@ namespace WpfClient
         private User currentUser;
         private WorkoutPlanList workPlans;
         private ServiceModelClient GymService;
+        public UserList users;
+
 
         public UserWindow(User user)
         {
             InitializeComponent();
             currentUser = user;
             GymService = new ServiceModelClient();
+            users = GymService.GetAllPlanAdmins();
             LoadTodayWorkout();
         }
 
@@ -57,7 +60,7 @@ namespace WpfClient
         private void MyWorkout_Selected(object sender, RoutedEventArgs e)
         {
             Clear_Grid();
-            MainView.Children.Add(new WeeKPlanUC(currentUser));
+            MainView.Children.Add(new WeeKPlanUC(currentUser, this));
         }
 
         private void LoadTodayWorkout()
@@ -71,20 +74,32 @@ namespace WpfClient
             LoadTodayWorkout();
         }
 
-        private void RecommendedWorkour_Selected(object sender, RoutedEventArgs e)
+        public void RecommendedWorkour_Selected(object sender, RoutedEventArgs e)
         {
             Clear_Grid();
-            UserList users = GymService.GetAllPlanAdmins();
             foreach (User u in users)
             {
                 EditWorkoutUC editWorkoutUC = new EditWorkoutUC(u);
                 editWorkoutUC.MouseUp += ShowPlan;
+                editWorkoutUC.Tag = u;
                 ProgramView.Children.Add(editWorkoutUC);
             }
         }
 
+        public void SwitchPlan(object sender, RoutedEventArgs e)
+        {
+            Clear_Grid();
+            EditWorkoutUC ewu = sender as EditWorkoutUC;
+            MainView.Children.Add(new WeeKPlanUC(ewu.Tag as User, this));
+        }
+
         private void ShowPlan(object sender, RoutedEventArgs e)
         {
+            Clear_Grid();
+            EditWorkoutUC ewu = (sender as EditWorkoutUC);
+            WeeKPlanUC weeKPlanUC = new WeeKPlanUC(ewu.user,this);
+            weeKPlanUC.Tag = this;
+            MainView.Children.Add(weeKPlanUC);
 
         }
     }

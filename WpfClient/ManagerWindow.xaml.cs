@@ -47,6 +47,7 @@ namespace WpfClient
         public void EditProgram_Selected()
         {
             this.ProgramView.Children.Clear();
+            planlist = GymService.GetAllPlanAdmins();
             foreach (User u in planlist)
             {
                 ProgramView.Children.Add(new ProgramPlanUC(u, this));

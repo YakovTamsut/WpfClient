@@ -26,26 +26,34 @@ namespace WpfClient
     {
         private ServiceModelClient GymService;
         private WorkoutPlanList workPlans;
+        private UserWindow userWindow;
         //https://www.youtube.com/watch?v=THV5BW5WW_o&t=130s
-        public WeeKPlanUC(User user)
+        public WeeKPlanUC(User user, UserWindow window)
         {
             InitializeComponent();
+            userWindow = window;
             GymService = new ServiceModelClient();
             workPlans = GymService.GetUserWorkoutPlans(user);
             bool[] empty = new bool[7];
-            WorkoutsUC trash = new WorkoutsUC(true);
-            trash.isTrash = true;
-            trash.MouseMove += Uc_MouseMove;
-            trash.MouseUp += Uc_MouseUp;
-            trash.Drop += Uc_Drop;
-            MoveToTrash.Children.Add(trash);
+            if (!user.IsManager)
+            {
+                WorkoutsUC trash = new WorkoutsUC(true);
+                trash.isTrash = true;
+                trash.MouseMove += Uc_MouseMove;
+                trash.MouseUp += Uc_MouseUp;
+                trash.Drop += Uc_Drop;
+                MoveToTrash.Children.Add(trash);
+            }
             foreach (WorkoutPlan wp in workPlans)
             {
-                WorkoutsUC uc = new WorkoutsUC(wp, false); 
-                uc.MouseMove += Uc_MouseMove;
-                uc.MouseUp += Uc_MouseUp;
-                uc.Drop += Uc_Drop;
-                uc.Tag = wp;
+                WorkoutsUC uc = new WorkoutsUC(wp, false);
+                if (!user.IsManager)
+                {
+                    uc.MouseMove += Uc_MouseMove;
+                    uc.MouseUp += Uc_MouseUp;
+                    uc.Drop += Uc_Drop;
+                    uc.Tag = wp;
+                }
                 if (wp.Day != 0)
                 {
                     //ExWP.Children.Add(uc);
@@ -87,9 +95,27 @@ namespace WpfClient
                 }
                 else
                 {
-                    ExLB.Items.Add(uc);
+                    if (!user.IsManager)
+                    {
+                        ExLB.Items.Add(uc);
+                    }
                 }
                 
+            }
+            if (user.IsManager)
+            {
+                UserList users = GymService.GetAllPlanAdmins();
+                foreach (User u in users)
+                {
+                    if (u != user)
+                    {
+                        EditWorkoutUC ewu = new EditWorkoutUC(u);
+                        ewu.MouseUp += userWindow.SwitchPlan;
+                        ewu.Tag = u;
+                        ExLB.Items.Add(ewu);
+                    }
+
+                }
             }
 
             for (int i = 0; i < empty.Length; i++)
@@ -101,9 +127,12 @@ namespace WpfClient
                 uc.Tag = wop;
                 if (empty[i] == false)
                 {
-                    uc.MouseMove += Uc_MouseMove;
-                    uc.MouseUp += Uc_MouseUp;
-                    uc.Drop += Uc_Drop;
+                    if (!user.IsManager)
+                    {
+                        uc.MouseMove += Uc_MouseMove;
+                        uc.MouseUp += Uc_MouseUp;
+                        uc.Drop += Uc_Drop;
+                    }
                     DayUC duc = new DayUC(uc);
                     switch (i)
                     {

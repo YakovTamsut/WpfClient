@@ -71,7 +71,12 @@
                             <TextBlock Text="Add New Plan" Margin="10" />
                         </StackPanel>
                     </ListViewItem>
-                    
+                    <ListViewItem Height="45" Padding="0" Selected="ManageUsers_Selected">
+                        <StackPanel Orientation="Horizontal" Margin="10 0">
+                            <materialDesign:PackIcon Kind="Settings" Width="20" Height="20" Foreground="#grey" Margin="5" VerticalAlignment="Center" />
+                            <TextBlock Text="Manage users" Margin="10" />
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem Height="45" Padding="0">
                         <StackPanel Orientation="Horizontal" Margin="10 0">
                             <Button x:Name="ButtonCloseApp" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF0069C1" Padding="0" Click="ButtonCloseApp_Click">
